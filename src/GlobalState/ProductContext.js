@@ -4,7 +4,6 @@ import Reducer from "./Reducer";
 let initialState = {
   cart: [],
   products: [],
-  totalPrice:0,
 };
 // create context
 let productsContext = createContext();
@@ -29,7 +28,7 @@ export default function ProductContext({ children }) {
     let cartItem= state.cart.filter((element)=>{
       return element.id!=id
     })
-    dispatch({type:'Remove_Cart_Item', payload: {cartItem}})
+    dispatch({type:'Remove_Cart_Item', payload: cartItem})
   };
   useEffect(() => {
     getProducts();
@@ -42,7 +41,6 @@ export default function ProductContext({ children }) {
           addCart,
           cartItems: state.cart,
           removeCartItem,
-          totalPrice:state.totalPrice,
         }}
       >
         {children}

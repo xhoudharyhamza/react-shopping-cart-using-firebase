@@ -1,22 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext} from "react";
 import { productsContext } from "../GlobalState/ProductContext";
 export default function Cart() {
-  // use state hook to calculate total price of products in cart item
-  const [price, setPrice] = useState(0);
   // destructuring of useContext hook
-  let { products, cartItems, totalPrice, addCart, removeCartItem } =
+  let { products, cartItems, addCart, removeCartItem} =
     useContext(productsContext);
     // use array reduce method calculate total price of products in cart items
-  useEffect(() => {
-    setPrice(cartItems.reduce((value, current) => value + current.price, 0));
-  }, [cartItems]);
+    let totalPrice= cartItems.reduce((value, current) => value + current.price, 0)
   return (
     <>
       <div className="container">
-        {cartItems.map((item) => {
+        {cartItems.map((item,index) => {
           return (
             <div
               className="row my-2"
+              key={index}
               style={{ border: "1px solid #9a9c9e", padding: "10px 20px" }}
             >
               <div className="col-md-5 col-sm-12 text-center">
@@ -50,7 +47,7 @@ export default function Cart() {
               <hr />
               <div className="col-md-6 col-sm-12">
                 <p>
-                  <b>Total: ${price}</b>
+                  <b>Total: ${totalPrice}</b>
                 </p>
               </div>
               <div className="col-md-6 col-sm-12">

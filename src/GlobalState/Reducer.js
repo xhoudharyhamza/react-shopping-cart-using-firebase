@@ -14,7 +14,7 @@ export default (state, action) => {
       case "Remove_Cart_Item":
         return{
           ...state,
-          cart:[...action.payload.cartItem]
+          cart:[...action.payload]
         }
     default:
       return {
