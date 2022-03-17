@@ -23,8 +23,7 @@ export default function ProductContext({ children }) {
     let cartItem = state.products.filter((element) => {
       return element.id == id;
     });
-    
-    dispatch({ type: "Add_To_Cart", payload: {cartItem} });
+    dispatch({ type: "Add_To_Cart", payload: {...cartItem[0],qnt:1}} );
   };
   const removeCartItem = (id) => {
     let cartItem= state.cart.filter((element)=>{

@@ -5,7 +5,6 @@ export default function Footer() {
   // destructuring of context hook 
   let { products, cartItems, totalPrice, addCart, removeCartItem } =
     useContext(productsContext);
-    console.log(cartItems.length)
   return (
     <>
     {/* use turnory operator to fixed footer if products are not fetched from api */}

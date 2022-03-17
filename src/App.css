@@ -56,3 +56,18 @@ footer{
   color: white;
   margin-right: 5px;
 }
+.item-quantity{
+  display: flex;
+}
+.item-quantity button{
+  padding: 2px 20px;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  margin: 10px 20px;
+}
+.item-quantity p{
+  padding: 2px 20px;
+  font-size: 20px;
+  margin: 10px 0px;
+}

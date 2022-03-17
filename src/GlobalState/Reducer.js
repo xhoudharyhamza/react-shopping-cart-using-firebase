@@ -9,8 +9,7 @@ export default (state, action) => {
     case "Add_To_Cart":
       return {
         ...state,
-        cart:[...state.cart, ...action.payload.cartItem],
-        totalPrice:action.payload.price
+        cart:[...state.cart, action.payload],
       };
       case "Remove_Cart_Item":
         return{

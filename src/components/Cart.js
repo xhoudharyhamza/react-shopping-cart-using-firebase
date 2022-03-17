@@ -26,7 +26,11 @@ export default function Cart() {
                 <h5>{item.title}</h5>
                 <p>{item.description}</p>
                 <p style={{ fontWeight: "bold" }}>${item.price}</p>
-                <span key={item.id}></span>
+                <div className="item-quantity">
+                  <button>+</button>
+                  <p>{item.qnt}</p>
+                  <button>-</button>
+                </div>
                 <button
                   className="btn btn-danger"
                   onClick={() => {
