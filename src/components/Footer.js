@@ -2,13 +2,20 @@ import React, { useContext, useState, useEffect } from "react";
 import { productsContext } from "../GlobalState/ProductContext";
 
 export default function Footer() {
-  // destructuring of context hook 
+  // destructuring of context hook
   let { products, cartItems, totalPrice, addCart, removeCartItem } =
     useContext(productsContext);
   return (
     <>
-    {/* use turnory operator to fixed footer if products are not fetched from api */}
-      <footer className={`${cartItems.length===0?"footer": null}`} style={ products.length===0 ? { position:"fixed", bottom:0, width:"100%"} : {position:"relative"} }>
+      {/* use turnary operator to fixed footer if products are not fetched from api */}
+      <footer
+        className={`${cartItems.length === 0 ? "footer" : null}`}
+        style={
+          products.length === 0
+            ? { position: "fixed", bottom: 0, width: "100%" }
+            : { position: "relative" }
+        }
+      >
         <div className="container">
           <div className="row">
             <div className="col-md-6 col-sm-12">

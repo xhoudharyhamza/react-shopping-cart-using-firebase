@@ -15,20 +15,44 @@ export default function ProductContext({ children }) {
     let url = "https://fakestoreapi.com/products";
     let data = await fetch(url);
     let parseData = await data.json();
-    // dispatch action to update the state 
-    dispatch({ type: "Add_Data", payload: {parseData} });
+    // dispatch action to update the state
+    dispatch({ type: "Add_Data", payload: { parseData } });
   };
   const addCart = (id) => {
     let cartItem = state.products.filter((element) => {
       return element.id == id;
     });
-    dispatch({ type: "Add_To_Cart", payload: {...cartItem[0],qnt:1}} );
+    dispatch({ type: "Add_To_Cart", payload: { ...cartItem[0], qnt: 1 } });
   };
   const removeCartItem = (id) => {
-    let cartItem= state.cart.filter((element)=>{
-      return element.id!=id
-    })
-    dispatch({type:'Remove_Cart_Item', payload: cartItem})
+    let cartItem = state.cart.filter((element) => {
+      return element.id != id;
+    });
+    dispatch({ type: "Remove_Cart_Item", payload: cartItem });
+  };
+  const addQuantity = (id) => {
+    let cartItem = state.cart.map((element) => {
+      if (element.id == id) {
+        return {
+          ...element,
+          qnt: element.qnt + 1,
+        };
+      }
+      return element;
+    });
+    dispatch({ type: "Increment_Quantity", payload: cartItem });
+  };
+  const decrementQuantity = (id) => {
+    let cartItem = state.cart.map((element) => {
+      if (element.id == id) {
+        return {
+          ...element,
+          qnt: element.qnt - 1,
+        };
+      }
+      return element;
+    });
+    dispatch({ type: "Decrement_Quantity", payload: cartItem });
   };
   useEffect(() => {
     getProducts();
@@ -41,6 +65,8 @@ export default function ProductContext({ children }) {
           addCart,
           cartItems: state.cart,
           removeCartItem,
+          addQuantity,
+          decrementQuantity,
         }}
       >
         {children}

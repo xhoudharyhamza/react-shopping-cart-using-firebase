@@ -1,72 +1,72 @@
-*{
-  margin:0;
-  padding:0;
+* {
+  margin: 0;
+  padding: 0;
 }
-img{
+img {
   height: 250px;
   object-fit: contain;
 }
-.add-cart-btn{
+.add-cart-btn {
   width: 100%;
   display: block;
-  font-family: 'Source Serif Pro', serif;
+  font-family: "Source Serif Pro", serif;
   font-weight: 600;
 }
-.product-item:hover{
+.product-item:hover {
   box-shadow: 0px 0px 7px rgb(56, 23, 23);
 }
-.menu-items li a{
+.menu-items li a {
   font-size: 18px;
   color: white;
-  font-family: 'Source Serif Pro', serif;
+  font-family: "Source Serif Pro", serif;
   font-weight: 500;
 }
-.logo{ 
-  font-family: 'Source Serif Pro', serif;
+.logo {
+  font-family: "Source Serif Pro", serif;
   font-size: 20px;
   font-weight: bold;
 }
-footer{
+footer {
   background-color: #212529;
   padding: 80px 10px 30px 10px;
 }
-.social-media a{
+.social-media a {
   text-decoration: none;
   color: white;
   background: transparent;
   padding: 10px 10px;
   font-size: 25px;
 }
-.social-media a i{
+.social-media a i {
   border: 1px solid white;
   padding: 5px 8px;
 }
-.social-media a i:hover{
+.social-media a i:hover {
   background-color: white;
   color: black;
 }
-.copyright p{
+.copyright p {
   margin: 20px 10px 0px 10px;
   color: white;
   text-align: center;
   font-size: 20px;
-  font-family: 'Source Serif Pro', serif;
+  font-family: "Source Serif Pro", serif;
 }
-.copyright p span{
+.copyright p span {
   color: white;
   margin-right: 5px;
 }
-.item-quantity{
+.item-quantity {
   display: flex;
 }
-.item-quantity button{
+.item-quantity button {
   padding: 2px 20px;
   border: none;
   outline: none;
   font-size: 20px;
   margin: 10px 20px;
 }
-.item-quantity p{
+.item-quantity p {
   padding: 2px 20px;
   font-size: 20px;
   margin: 10px 0px;

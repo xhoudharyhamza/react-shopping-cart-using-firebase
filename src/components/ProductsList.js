@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProductsList(props) {
   let { addCart, id, price, title, img } = props;
-  let productTitle= title.slice(0,35)
+  let productTitle = title.slice(0, 35);
   return (
     <>
       <div className="col-md-3 col-sm-12 my-3 product-item">

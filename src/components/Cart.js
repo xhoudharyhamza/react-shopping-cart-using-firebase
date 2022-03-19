@@ -1,15 +1,24 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { productsContext } from "../GlobalState/ProductContext";
 export default function Cart() {
   // destructuring of useContext hook
-  let { products, cartItems, addCart, removeCartItem} =
-    useContext(productsContext);
-    // use array reduce method calculate total price of products in cart items
-    let totalPrice= cartItems.reduce((value, current) => value + current.price, 0)
+  let {
+    products,
+    cartItems,
+    addCart,
+    removeCartItem,
+    addQuantity,
+    decrementQuantity,
+  } = useContext(productsContext);
+  // use array reduce method calculate total price of products in cart items
+  let totalPrice = cartItems.reduce(
+    (value, current) => value + current.price * current.qnt,
+    0
+  );
   return (
     <>
       <div className="container">
-        {cartItems.map((item,index) => {
+        {cartItems.map((item, index) => {
           return (
             <div
               className="row my-2"
@@ -22,11 +31,26 @@ export default function Cart() {
               <div className="col-md-7 col-sm-12" style={{ marginTop: "15px" }}>
                 <h5>{item.title}</h5>
                 <p>{item.description}</p>
-                <p style={{ fontWeight: "bold" }}>${item.price}</p>
+                <p style={{ fontWeight: "bold" }}>
+                  {item.qnt} * {item.price}={item.qnt * item.price}{" "}
+                </p>
                 <div className="item-quantity">
-                  <button>+</button>
+                  <button
+                    onClick={() => {
+                      addQuantity(item.id);
+                    }}
+                  >
+                    +
+                  </button>
                   <p>{item.qnt}</p>
-                  <button>-</button>
+                  <button
+                    onClick={() => {
+                      decrementQuantity(item.id);
+                    }}
+                    style={{ display: item.qnt == 1 ? "none" : "block" }}
+                  >
+                    -
+                  </button>
                 </div>
                 <button
                   className="btn btn-danger"

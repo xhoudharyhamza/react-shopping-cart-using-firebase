@@ -9,13 +9,23 @@ export default (state, action) => {
     case "Add_To_Cart":
       return {
         ...state,
-        cart:[...state.cart, action.payload],
+        cart: [...state.cart, action.payload],
       };
-      case "Remove_Cart_Item":
-        return{
-          ...state,
-          cart:[...action.payload]
-        }
+    case "Remove_Cart_Item":
+      return {
+        ...state,
+        cart: [...action.payload],
+      };
+    case "Increment_Quantity":
+      return {
+        ...state,
+        cart: [...action.payload],
+      };
+    case "Decrement_Quantity":
+      return {
+        ...state,
+        cart: [...action.payload],
+      };
     default:
       return {
         ...state,
