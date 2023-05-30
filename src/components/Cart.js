@@ -1,86 +1,49 @@
 import React, { useContext } from "react";
-import { productsContext } from "../GlobalState/ProductContext";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProductFromCart } from "../redux/slices/productsSlice";
 export default function Cart() {
-  // destructuring of useContext hook
-  let {
-    products,
-    cartItems,
-    addCart,
-    removeCartItem,
-    addQuantity,
-    decrementQuantity,
-  } = useContext(productsContext);
-  // use array reduce method calculate total price of products in cart items
-  let totalPrice = cartItems.reduce(
-    (value, current) => value + current.price * current.qnt,
-    0
-  );
-  return (
-    <>
-      <div className="container">
-        {cartItems.map((item, index) => {
-          return (
-            <div
-              className="row my-2"
-              key={index}
-              style={{ border: "1px solid #9a9c9e", padding: "10px 20px" }}
-            >
-              <div className="col-md-5 col-sm-12 text-center">
-                <img src={item.image} alt="image" />
-              </div>
-              <div className="col-md-7 col-sm-12" style={{ marginTop: "15px" }}>
-                <h5>{item.title}</h5>
-                <p>{item.description}</p>
-                <p style={{ fontWeight: "bold" }}>
-                  {item.qnt} * {item.price}={item.qnt * item.price}{" "}
-                </p>
-                <div className="item-quantity">
-                  <button
-                    onClick={() => {
-                      addQuantity(item.id);
-                    }}
-                  >
-                    +
-                  </button>
-                  <p>{item.qnt}</p>
-                  <button
-                    onClick={() => {
-                      decrementQuantity(item.id);
-                    }}
-                    style={{ display: item.qnt == 1 ? "none" : "block" }}
-                  >
-                    -
-                  </button>
-                </div>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => {
-                    removeCartItem(item.id);
-                  }}
-                >
-                  Remove From Cart
-                </button>
-              </div>
-            </div>
-          );
-        })}
+  let dispatch = useDispatch()
+  const { cart } = useSelector((state) => {
+    return state.products;
+  });
 
-        {cartItems.length != 0 ? (
-          <>
-            <div className="row my-2">
-              <hr />
-              <div className="col-md-6 col-sm-12">
-                <p>
-                  <b>Total: ${totalPrice}</b>
-                </p>
-              </div>
-              <div className="col-md-6 col-sm-12">
-                <button className="btn btn-primary">Safe CheckOut</button>
-              </div>
-            </div>
-          </>
-        ) : null}
-      </div>
-    </>
+  return (
+    <div className="shopping-cart cart mt-3 container">
+      {cart.length > 0 ? <table className="table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cart.map((cartProduct, index) => {
+            return (
+              <tr key={index}>
+                <td>
+                  <img
+                    className="card-img-top"
+                    src={cartProduct.image}
+                    alt="Product Image"
+                  />
+                </td>
+                <td>{cartProduct.title}</td>
+                <td>
+                  <strong>${cartProduct.price}</strong>
+                </td>
+                <td>{cartProduct.rating.rate}</td>
+                <td>
+                  <button className="btn btn-danger" onClick={() => { dispatch(deleteProductFromCart(index)) }}>Delete Product</button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+        : <h5 className="text-center mt-5">Shopping Cart is Empty!</h5>}
+    </div>
   );
 }

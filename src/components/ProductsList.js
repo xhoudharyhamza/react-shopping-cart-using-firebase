@@ -1,30 +1,18 @@
 import React from "react";
-
-export default function ProductsList(props) {
-  let { addCart, id, price, title, img } = props;
-  let productTitle = title.slice(0, 35);
+import { addProductsToCart } from "../redux/slices/productsSlice";
+import { useDispatch } from "react-redux";
+export default function ProductsList({ product }) {
+  let dispatch = useDispatch()
   return (
-    <>
-      <div className="col-md-3 col-sm-12 my-3 product-item">
-        <div className="card">
-          <img src={img} className="card-img-top" alt="image" />
-          <div className="card-body">
-            <h5 className="card-title">{productTitle}...</h5>
-            <b>
-              <p className="card-text">${price}</p>
-            </b>
-            <p className="card-text"></p>
-            <button
-              className="btn btn-primary add-cart-btn"
-              onClick={() => {
-                addCart(id);
-              }}
-            >
-              Add To Cart
-            </button>
-          </div>
+    <div className="col-md-6 col-lg-3 col-sm-12 my-1">
+      <div className="card product">
+        <img className="card-img-top" src={product.image} alt="Card image cap" />
+        <div className="card-body">
+          <h6 className="card-title">{product.title}</h6>
+          <p><b>${product.price}</b></p>
+          <button className="btn btn-primary" onClick={() => { dispatch(addProductsToCart(product.id)) }}>Add To Cart</button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
