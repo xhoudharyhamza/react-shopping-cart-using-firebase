@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins&display=swap");
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
 }
 img {
   height: 150px;
@@ -16,7 +17,30 @@ img {
   font-size: 20px;
   font-weight: bold;
 }
-.shopping-cart img{
+.shopping-cart img {
   height: 100px;
   object-fit: contain;
+}
+.login,.signup {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0px;
+}
+.login-form,
+.signup-form {
+  width: 100%;
+  max-width: 600px;
+}
+.login-form h2,
+.signup-form h2 {
+  text-align: center;
+}
+.login-form input,
+.signup-form input {
+  margin: 0.3rem 0rem;
+}
+.login-form button,
+.signup-form button {
+  display: block;
+  width: 100%;
 }

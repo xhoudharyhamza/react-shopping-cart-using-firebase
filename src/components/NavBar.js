@@ -1,9 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavLink } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../redux/slices/userSlice";
 export default function NavBar() {
-  let {cart}=useSelector((state)=>{
+  let dispatch = useDispatch()
+  let { cart } = useSelector((state) => {
     return state.products
+  })
+  let { user } = useSelector((state) => {
+    return state.user
   })
   return (
     <>
@@ -29,12 +34,25 @@ export default function NavBar() {
           >
             <ul className="navbar-nav menu-items ">
               <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" exact to="/" activeStyle={{ borderBottom: '2px solid red' }}>
+                <NavLink className="nav-link" aria-current="page" exact to="/" >
                   Home
                 </NavLink>
               </li>
+              {user && <li className="nav-item">
+                <a className="nav-link" aria-current="page"  >
+                  {user.email}
+                </a>
+              </li>}
+              {!user ? <li className="nav-item">
+                <NavLink className="nav-link" aria-current="page" exact to="/login">
+                  Login
+                </NavLink>
+              </li> : <li className="nav-item">
+                <a className="nav-link" aria-current="page" style={{ cursor: "pointer" }} onClick={() => { dispatch(logoutUser()) }}>
+                  Logout
+                </a>              </li>}
               <li className="nav-item">
-                <NavLink className="nav-link" to="cart" activeStyle={{ borderBottom: '2px solid red' }}>
+                <NavLink className="nav-link" to="cart">
                   <i className="fas fa-shopping-cart"></i>
                   <span className="badge rounded-pill badge-notification bg-danger">{cart.length}</span>
                 </NavLink>

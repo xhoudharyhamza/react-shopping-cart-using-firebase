@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteProductFromCart } from "../redux/slices/productsSlice";
 export default function Cart() {
@@ -6,7 +6,6 @@ export default function Cart() {
   const { cart } = useSelector((state) => {
     return state.products;
   });
-
   return (
     <div className="shopping-cart cart mt-3 container">
       {cart.length > 0 ? <table className="table">
@@ -16,7 +15,9 @@ export default function Cart() {
             <th>Title</th>
             <th>Price</th>
             <th>Rating</th>
+            <th>Quantity</th>
             <th>Action</th>
+
           </tr>
         </thead>
         <tbody>
@@ -36,7 +37,10 @@ export default function Cart() {
                 </td>
                 <td>{cartProduct.rating.rate}</td>
                 <td>
-                  <button className="btn btn-danger" onClick={() => { dispatch(deleteProductFromCart(index)) }}>Delete Product</button>
+                  {cartProduct.quantity}
+                </td>
+                <td>
+                  <i className="fa-solid fa-trash text-danger" style={{ cursor: "pointer" }} onClick={() => { dispatch(deleteProductFromCart(index)) }}></i>
                 </td>
               </tr>
             );

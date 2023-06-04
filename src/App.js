@@ -3,20 +3,19 @@ import "./App.css";
 import Cart from "./components/Cart";
 import NavBar from "./components/NavBar";
 import Products from "./components/Products";
-import {  Switch, Route } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 function App() {
   return (
     <>
       <NavBar />
-      <Switch>
-        <Route exact path="/">
-          <Products />
-        </Route>
-        <Route exact path="/cart">
-          <Cart />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Products />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
     </>
   );
 }
