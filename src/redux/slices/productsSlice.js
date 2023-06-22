@@ -12,7 +12,7 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     setProducts(state, action) {
-      state.products = action.payload;
+      state.products = [...state.products,...action.payload]
     },
     setError(state, action) {
       state.error = action.payload;
@@ -33,9 +33,36 @@ const productsSlice = createSlice({
       })
       state.cart = cartProducts
       setProductsToLocalStorage(state.cart)
+    },
+    incrementProductsQuantity(state,action){
+      state.cart=state.cart.map((product,index)=>{
+        if(action.payload===index){
+          return{
+            ...product,
+            quantity:product.quantity+1
+          }
+        }
+        else{
+          return product
+        }
+      })
+      setProductsToLocalStorage(state.cart)
+    },decrementProductsQuantity(state,action){
+      state.cart=state.cart.map((product,index)=>{
+        if(action.payload===index){
+          return{
+            ...product,
+            quantity:product.quantity-1
+          }
+        }
+        else{
+          return product
+        }
+      })
+      setProductsToLocalStorage(state.cart)
     }
   },
 });
 
-export const { setProducts, setError, setLoading, addProductsToCart, deleteProductFromCart } = productsSlice.actions;
+export const { setProducts, setError, setLoading, addProductsToCart, deleteProductFromCart,incrementProductsQuantity,decrementProductsQuantity } = productsSlice.actions;
 export default productsSlice.reducer;

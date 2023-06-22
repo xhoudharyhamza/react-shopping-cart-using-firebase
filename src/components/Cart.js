@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProductFromCart } from "../redux/slices/productsSlice";
+import { deleteProductFromCart,incrementProductsQuantity,decrementProductsQuantity } from "../redux/slices/productsSlice";
 export default function Cart() {
   let dispatch = useDispatch()
   const { cart } = useSelector((state) => {
@@ -17,7 +17,6 @@ export default function Cart() {
             <th>Rating</th>
             <th>Quantity</th>
             <th>Action</th>
-
           </tr>
         </thead>
         <tbody>
@@ -27,7 +26,7 @@ export default function Cart() {
                 <td>
                   <img
                     className="card-img-top"
-                    src={cartProduct.image}
+                    src={cartProduct.images[0]}
                     alt="Product Image"
                   />
                 </td>
@@ -35,9 +34,9 @@ export default function Cart() {
                 <td>
                   <strong>${cartProduct.price}</strong>
                 </td>
-                <td>{cartProduct.rating.rate}</td>
+                <td>5</td>
                 <td>
-                  {cartProduct.quantity}
+                  <div className="product-quantity"><button onClick={()=>{dispatch(incrementProductsQuantity(index))}}>+</button> <p>{cartProduct.quantity}</p><button disabled={cartProduct.quantity<=1} onClick={()=>{dispatch(decrementProductsQuantity(index))}}>-</button></div>
                 </td>
                 <td>
                   <i className="fa-solid fa-trash text-danger" style={{ cursor: "pointer" }} onClick={() => { dispatch(deleteProductFromCart(index)) }}></i>
